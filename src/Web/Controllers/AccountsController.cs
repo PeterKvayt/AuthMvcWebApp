@@ -78,7 +78,7 @@ namespace Web.Controllers
         {
             if (model == null)
             {
-                ModelState.AddModelError("", "Model was null.");
+                ModelState.AddModelError("Email", "Model was null.");
                 return View(model);
             }
 
@@ -98,7 +98,7 @@ namespace Web.Controllers
                 }
                 else
                 {
-                    throw new Exception();
+                    ModelState.AddModelError("Email", "This user is exists.");
                 }
             }
 

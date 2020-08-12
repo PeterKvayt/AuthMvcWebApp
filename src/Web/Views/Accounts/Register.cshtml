@@ -1,32 +1,40 @@
 ﻿@model Core.ViewModels.RegisterViewModel
 
-<h2>Registration</h2>
+<div class="row justify-content-center">
 
-<a asp-action="" asp-controller="Accounts">Sign in</a>
+    <div class="col-lg-6 col-md-6 col-sm-12">
 
-<form asp-action="Register" asp-controller="Accounts" method="post">
-    <div class="validation" asp-validation-summary="ModelOnly" />
+        <h2>Registration</h2>
 
-    <div class="form-group">
-        <label asp-for="Email" class="control-label">Enter Email</label>
-        <input asp-for="Email" class="form-control input-form"/>
-        <span class="text text-warning" asp-validation-for="Email" />
+        <form asp-action="Register" asp-controller="Accounts" method="post">
+
+            <div class="text-danger" asp-validation-summary="All"></div>
+
+            <div class="form-group">
+                <label asp-for="@Model.Email" class="control-label"></label>
+                <input asp-for="@Model.Email" class="form-control input-form" />
+                <span class="text-danger" asp-validation-for="@Model.Email" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.Password" class="control-label"></label>
+                <input asp-for="@Model.Password" class="form-control input-form" />
+                <span class="text-danger" asp-validation-for="@Model.Password" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.ConfirmPassword" class="control-label"></label>
+                <input asp-for="@Model.ConfirmPassword" class="form-control input-form" />
+                <span class="text-danger" asp-validation-for="@Model.ConfirmPassword" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-outline-primary" />
+                <a asp-action="" asp-controller="Accounts" class="btn btn-outline-info">Sign in</a>
+            </div>
+
+        </form>
+
     </div>
 
-    <div class="form-group">
-        <label asp-for="Password" class="control-label">Enter password</label>
-        <input asp-for="Password" class="form-control input-form"/>
-        <span class="text text-warning" asp-validation-for="Password" />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="ConfirmPassword" class="control-label">Confirm password</label>
-        <input asp-for="ConfirmPassword" class="form-control input-form"/>
-        <span class="text text-warning" asp-validation-for="ConfirmPassword" />
-    </div>
-
-    <div class="form-group">
-        <input type="submit" value="Sign in" class="btn btn-outline-dark" />
-    </div>
-
-</form>
+</div>
