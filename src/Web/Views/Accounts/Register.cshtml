@@ -1,0 +1,32 @@
+﻿@model Core.ViewModels.RegisterViewModel
+
+<h2>Registration</h2>
+
+<a asp-action="" asp-controller="Accounts">Sign in</a>
+
+<form asp-action="Register" asp-controller="Accounts" method="post">
+    <div class="validation" asp-validation-summary="ModelOnly" />
+
+    <div class="form-group">
+        <label asp-for="Email" class="control-label">Enter Email</label>
+        <input asp-for="Email" class="form-control input-form"/>
+        <span class="text text-warning" asp-validation-for="Email" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password" class="control-label">Enter password</label>
+        <input asp-for="Password" class="form-control input-form"/>
+        <span class="text text-warning" asp-validation-for="Password" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ConfirmPassword" class="control-label">Confirm password</label>
+        <input asp-for="ConfirmPassword" class="form-control input-form"/>
+        <span class="text text-warning" asp-validation-for="ConfirmPassword" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Sign in" class="btn btn-outline-dark" />
+    </div>
+
+</form>

@@ -1,0 +1,13 @@
+﻿@model Core.ViewModels.UserViewModel
+
+<h2>User profile</h2>
+
+<p>
+    User email: @Model.Email
+</p>
+
+<p>
+    User role: @Model.RoleName
+</p>
+
+<a asp-action="SignOut" asp-controller="Accounts">Sign out</a>
