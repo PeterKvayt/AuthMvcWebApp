@@ -62,8 +62,6 @@ namespace Web.Controllers
                 }
             }
 
-            ModelState.AddModelError("", "Wrong credentials");
-
             return View(model);
         }
 
@@ -78,13 +76,13 @@ namespace Web.Controllers
         {
             if (model == null)
             {
-                ModelState.AddModelError("Email", "Model was null.");
+                ModelState.AddModelError("", "Model was null.");
                 return View(model);
             }
 
             if (ModelState.IsValid)
             {
-                User user = _userService.Users.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
+                User user = _userService.Users.FirstOrDefault(u => u.Email == model.Email);
 
                 if (user == null)
                 {
@@ -98,7 +96,7 @@ namespace Web.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Email", "This user is exists.");
+                    ModelState.AddModelError("", $"User with email {model.Email} is already exists.");
                 }
             }
 

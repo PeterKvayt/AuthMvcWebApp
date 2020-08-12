@@ -6,7 +6,7 @@ namespace Core.Services
 {
     public sealed class UserService : IUserService
     {
-        private IRepository _repository;
+        private readonly IRepository _repository;
 
         public UserService(IRepository repository)
         {

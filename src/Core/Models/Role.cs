@@ -5,6 +5,11 @@ namespace Core.Models
     [Serializable]
     public sealed class Role
     {
+        public Role()
+        {
+                
+        }
+
         public Role(string name)
         {
             Name = name;

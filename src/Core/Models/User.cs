@@ -7,9 +7,13 @@ namespace Core.Models
     {
         #region Constructors
 
-        public User(string email, string password, Role role)
+        public User()
         {
             Id = Guid.NewGuid();
+        }
+
+        public User(string email, string password, Role role) : this()
+        {
             Email = email;
             Password = password;
             Role = role;
