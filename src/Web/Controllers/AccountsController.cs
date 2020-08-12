@@ -73,6 +73,11 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Profile", "Accounts");
+            }
+
             return View();
         }
 
@@ -119,7 +124,7 @@ namespace Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "admin")]
-        public IActionResult AdminProfile()
+        public IActionResult AdminDashboard()
         {
             var users = UserConverter.Convert(_userService.Users);
 
@@ -156,18 +161,16 @@ namespace Web.Controllers
             HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
-        private User GetUser(ClaimsPrincipal user)
+        private User GetUser(ClaimsPrincipal userClaims)
         {
-            var res = _userService.Users.FirstOrDefault(u => u.Email == user.Identity.Name);
+            var user = _userService.Users.FirstOrDefault(u => u.Email == userClaims.Identity.Name);
 
-            if (res != null)
+            if (user != null)
             {
-                return res;
+                return user;
             }
-            else
-            {
-                throw new Exception();
-            }
+
+            throw new Exception();
         }
 
         #endregion

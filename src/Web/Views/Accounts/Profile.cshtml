@@ -5,20 +5,20 @@
         <h2>Profile</h2>
     </div>
     <div class="col-lg-10 col-md-8 col-sm-8">
+        @if (@Model.RoleName == "admin")
+        {
+            <a class="btn btn-primary" asp-controller="Accounts" asp-action="AdminDashboard">Admin dashboard</a>
+        }
         <a class="btn btn-outline-primary" asp-action="SignOut" asp-controller="Accounts">Sign out</a>
-    @if (@Model.RoleName == "admin")
-    {
-        <a class="btn btn-primary" asp-controller="Accounts" asp-action="AdminProfile">Admin dashboard</a>
-    }
     </div>
 
-    <div class="col-12">
+    <div class="col-12 mt-3">
         <p>
-            User email: @Model.Email
+            <strong>User email</strong>: @Model.Email
         </p>
 
         <p>
-            User role: @Model.RoleName
+            <strong>User role</strong>: @Model.RoleName
         </p>
     </div>
 </div>

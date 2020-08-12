@@ -21,7 +21,7 @@ namespace Infrastructure.Middlewares
             }
             catch (Exception exception)
             {
-                throw exception;
+                await context.Response.WriteAsync(exception.Message);
             }
         }
     }

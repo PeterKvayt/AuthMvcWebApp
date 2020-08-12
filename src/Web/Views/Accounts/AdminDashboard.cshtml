@@ -2,17 +2,17 @@
 
 <div class="row">
 
-    <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="col-lg-3 col-md-6 col-sm-6">
         <h2>Admin dashboard</h2>
     </div>
 
-    <div class="col-lg-8 col-md-6 col-sm-6">
-        <a class="btn btn-outline-primary" asp-action="SignOut" asp-controller="Accounts">Sign out</a>
+    <div class="col-lg-9 col-md-6 col-sm-6">
         <a class="btn btn-primary" asp-action="Profile" asp-controller="Accounts">Profile</a>
+        <a class="btn btn-outline-primary" asp-action="SignOut" asp-controller="Accounts">Sign out</a>
     </div>
 
-    <div class="col-12">
-        <h5>All users</h5>
+    <div class="col-lg-6 col-md-8 col-sm-12 mt-3">
+        <h5 class="mb-5">All users</h5>
 
         @foreach (UserViewModel user in ViewBag.Users)
         {
