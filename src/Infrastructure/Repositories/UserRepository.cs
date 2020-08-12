@@ -41,7 +41,7 @@ namespace Infrastructure.Repositories
                 {
                     return JsonSerializer.DeserializeAsync<IList<User>>(stream).Result;
                 }
-                catch(JsonException exception)
+                catch (Exception)
                 {
                     return new List<User>() { };
                 }

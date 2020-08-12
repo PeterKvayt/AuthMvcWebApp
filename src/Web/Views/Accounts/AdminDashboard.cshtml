@@ -1,5 +1,16 @@
 ﻿@model Core.ViewModels.UserViewModel
 
+@{
+    const string DEFAULT_USER_ROLE = "user";
+    const string ADMIN_USER_ROLE = "admin";
+
+    void SetRequestData(UserViewModel user, string roleName)
+    {
+        ViewBag.UserId = user.Id;
+        ViewBag.RoleName = roleName;
+    }
+}
+
 <div class="row">
 
     <div class="col-lg-3 col-md-6 col-sm-6">
@@ -35,6 +46,19 @@
                     <div class="card-subtitle">
                         <strong>Role</strong>: @user.RoleName
                     </div>
+                    <form asp-action="ModifyRole" asp-controller="Accounts" method="post">
+                        @if (user.RoleName == DEFAULT_USER_ROLE)
+                        {
+                            SetRequestData(user, ADMIN_USER_ROLE);
+                            <input class="btn btn-outline-info" type="submit" value="Boost to admin" />
+                        }
+                        @if(user.RoleName == ADMIN_USER_ROLE)
+                        {
+                            SetRequestData(user, DEFAULT_USER_ROLE);
+                            <input class="btn btn-outline-warning" type="submit" value="Downgrade to user" />
+                        }
+                    </form>
+
                 </div>
             }
         }

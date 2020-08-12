@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using Microsoft.AspNetCore.SignalR;
 using Web.Converters;
 
 namespace Web.Controllers
@@ -142,6 +143,20 @@ namespace Web.Controllers
             HttpContext.SignOutAsync();
 
             return RedirectToAction("Index", "Accounts");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public IActionResult ModifyRole()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                _userService.SetRole(ViewBag.UserId, ViewBag.RoleName);
+
+                return RedirectToAction("AdminDashboard", "Accounts");
+            }
+
+            return RedirectToAction("Profile", "Accounts");
         }
 
         #endregion

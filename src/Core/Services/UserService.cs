@@ -1,6 +1,7 @@
 ﻿using Core.Interfaces;
 using Core.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.Services
 {
@@ -19,6 +20,17 @@ namespace Core.Services
         {
             _repository.Users.Add(user);
             _repository.Save();
+        }
+
+        public void SetRole(string userId, string roleName)
+        {
+            var user = _repository.Users.FirstOrDefault(u => u.Id.ToString() == userId);
+
+            if (user != null)
+            {
+                user.Role.Name = roleName;
+                _repository.Save();
+            }
         }
     }
 }

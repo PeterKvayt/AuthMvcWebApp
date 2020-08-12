@@ -9,11 +9,11 @@ namespace Core.Models
 
         public User()
         {
-            Id = Guid.NewGuid();
         }
 
-        public User(string email, string password, Role role) : this()
+        public User(string email, string password, Role role)
         {
+            Id = Guid.NewGuid();
             Email = email;
             Password = password;
             Role = role;
@@ -23,7 +23,7 @@ namespace Core.Models
 
         #region Properties
 
-        public readonly Guid Id;
+        public Guid Id { get; set; }
 
         public string Email { get; set; }
         //{
