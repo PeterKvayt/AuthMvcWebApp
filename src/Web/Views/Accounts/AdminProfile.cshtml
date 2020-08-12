@@ -16,20 +16,27 @@
 
         @foreach (UserViewModel user in ViewBag.Users)
         {
-    <div class="card-body">
-        <div class="card-title">
-            Id: @user.Id
-        </div>
-        <div class="card-subtitle">
-            Email: @user.Email
-        </div>
-        <div class="card-subtitle">
-            Password: @user.Password
-        </div>
-        <div class="card-subtitle">
-            Role: @user.RoleName
-        </div>
-    </div>
+            @if (user.Email == Model.Email)
+            {
+                continue;
+            }
+            else
+            {
+                <div class="card-body jumbotron">
+                    <div class="card-title">
+                        <strong>Id</strong> : @user.Id
+                    </div>
+                    <div class="card-subtitle">
+                        <strong>Email</strong>: @user.Email
+                    </div>
+                    <div class="card-subtitle">
+                        <strong>Password</strong>: @user.Password
+                    </div>
+                    <div class="card-subtitle">
+                        <strong>Role</strong>: @user.RoleName
+                    </div>
+                </div>
+            }
         }
     </div>
 

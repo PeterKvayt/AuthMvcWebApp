@@ -170,11 +170,6 @@ namespace Web.Controllers
             }
         }
 
-        private bool IsAuthenticated(ClaimsPrincipal userClaims)
-        {
-            return userClaims.Identity.IsAuthenticated;
-        }
-
         #endregion
     }
 }
