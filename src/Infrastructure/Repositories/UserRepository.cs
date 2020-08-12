@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Json;
 using System.Text.Json;
 
 namespace Infrastructure.Repositories
@@ -12,12 +11,6 @@ namespace Infrastructure.Repositories
     public sealed class UserRepository : IRepository
     {
         private IList<User> _users = new List<User> { };
-        //{
-        //    new User("mail","pass", new Role("user")),
-        //    new User("mail1","pass", new Role("user")),
-        //    new User("mail2","pass", new Role("admin")),
-        //    new User("mail3","pass", new Role("user")),
-        //};
 
         public IList<User> Users 
         {
@@ -42,7 +35,7 @@ namespace Infrastructure.Repositories
 
         private IList<User> GetUsers()
         {
-            using (var stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + FILE_NAME, FileMode.OpenOrCreate))
+            using (var stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + USERS_FILE_NAME, FileMode.OpenOrCreate))
             {
                 try
                 {
@@ -51,11 +44,6 @@ namespace Infrastructure.Repositories
                 catch(JsonException exception)
                 {
                     return new List<User>() { };
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
                 }
             }
         }
@@ -77,7 +65,7 @@ namespace Infrastructure.Repositories
             }
         }
 
-        private const string FILE_NAME = "users.json";
+        private const string USERS_FILE_NAME = "users.json";
 
         public void Save()
         {
@@ -86,7 +74,7 @@ namespace Infrastructure.Repositories
                 AllowTrailingCommas = true
             };
 
-            using (var stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + FILE_NAME, FileMode.OpenOrCreate))
+            using (var stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + USERS_FILE_NAME, FileMode.OpenOrCreate))
             {
                     JsonSerializer.SerializeAsync<IList<User>>(stream, _users, options);
             }

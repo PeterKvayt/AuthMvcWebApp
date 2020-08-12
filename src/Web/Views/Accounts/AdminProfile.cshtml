@@ -1,20 +1,27 @@
 ﻿@model Core.ViewModels.UserViewModel
 
-<h2>Admin profile</h2>
+<div class="row">
 
-<a asp-action="SignOut" asp-controller="Accounts">Sign out</a>
+    <div class="col-lg-4 col-md-6 col-sm-6">
+        <h2>Admin dashboard</h2>
+    </div>
 
-<p>
-    Admin email: @Model.Email
-</p>
+    <div class="col-lg-8 col-md-6 col-sm-6">
+        <a class="btn btn-outline-primary" asp-action="SignOut" asp-controller="Accounts">Sign out</a>
+        <a class="btn btn-primary" asp-action="Profile" asp-controller="Accounts">Profile</a>
+    </div>
 
-<h5>All default users</h5>
+    <div class="col-12">
+        <h5>All users</h5>
 
-@foreach (UserViewModel user in ViewBag.Users)
-{
+        @foreach (UserViewModel user in ViewBag.Users)
+        {
     <div class="card-body">
         <div class="card-title">
-            Email: @user.Email, Id: @user.Id
+            Id: @user.Id
+        </div>
+        <div class="card-subtitle">
+            Email: @user.Email
         </div>
         <div class="card-subtitle">
             Password: @user.Password
@@ -23,6 +30,10 @@
             Role: @user.RoleName
         </div>
     </div>
-}
+        }
+    </div>
+
+</div>
+
 
 

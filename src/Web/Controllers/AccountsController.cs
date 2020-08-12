@@ -33,6 +33,11 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Profile", "Accounts");
+            }
+
             return View();
         }
 
@@ -163,6 +168,11 @@ namespace Web.Controllers
             {
                 throw new Exception();
             }
+        }
+
+        private bool IsAuthenticated(ClaimsPrincipal userClaims)
+        {
+            return userClaims.Identity.IsAuthenticated;
         }
 
         #endregion

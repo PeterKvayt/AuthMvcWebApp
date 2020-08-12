@@ -1,13 +1,26 @@
 ﻿@model Core.ViewModels.UserViewModel
 
-<h2>User profile</h2>
+<div class="row">
+    <div class="col-lg-2 col-md-4 col-sm-4">
+        <h2>Profile</h2>
+    </div>
+    <div class="col-lg-10 col-md-8 col-sm-8">
+        <a class="btn btn-outline-primary" asp-action="SignOut" asp-controller="Accounts">Sign out</a>
+    @if (@Model.RoleName == "admin")
+    {
+        <a class="btn btn-primary" asp-controller="Accounts" asp-action="AdminProfile">Admin dashboard</a>
+    }
+    </div>
 
-<p>
-    User email: @Model.Email
-</p>
+    <div class="col-12">
+        <p>
+            User email: @Model.Email
+        </p>
 
-<p>
-    User role: @Model.RoleName
-</p>
+        <p>
+            User role: @Model.RoleName
+        </p>
+    </div>
+</div>
 
-<a asp-action="SignOut" asp-controller="Accounts">Sign out</a>
+
