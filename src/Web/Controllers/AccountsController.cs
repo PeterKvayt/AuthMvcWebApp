@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using Microsoft.AspNetCore.SignalR;
 using Web.Converters;
 
 namespace Web.Controllers
@@ -66,6 +65,8 @@ namespace Web.Controllers
 
                     return RedirectToAction("Profile", "Accounts");
                 }
+
+                ModelState.AddModelError("", $"The user with {model.Email} email does not exist .");
             }
 
             return View(model);
@@ -105,10 +106,8 @@ namespace Web.Controllers
 
                     return RedirectToAction("Profile", "Accounts");
                 }
-                else
-                {
-                    ModelState.AddModelError("", $"User with email {model.Email} is already exists.");
-                }
+
+                ModelState.AddModelError("", $"User with email {model.Email} is already exists.");
             }
 
             return View(model);

@@ -6,7 +6,10 @@ $(document).ready(function (event) {
     const MODIFY_ROLE_ACTION = "ModifyRole";
 
     $('.downgrade').on('click', function(){
-        console.log(this);
+        let userId =$(this).parents('.card-body').find('.user-id').text();
+
+        let model = new ModifyUserRoleViewModel(userId, DEFAULT_USER_ROLE);
+        ajaxPost(MODIFY_ROLE_ACTION, model);
     })
 
     $('.boost').on('click', function(){
@@ -22,18 +25,13 @@ $(document).ready(function (event) {
             type: 'POST',
             url: '/Accounts/' + method,
             data: { model: data },
-            error: onAjaxError,
             statusCode: {
                 200: function (data) {
                     document.write(data);
-                    document.location.href = document.location.protocol + '//' + document.location.host + '/Accounts';
+                    document.location.href = document.location.protocol + '//' + document.location.host + '/Accounts/AdminDashboard';
                 }
             }
         });
-    }
-
-    function onAjaxError(jqXHR) {
-        document.location.href = document.location.protocol + '//' + document.location.host + '/Projects/Error/?StatusCode=' + (Number)(jqXHR.status);
     }
 
 })
