@@ -1,5 +1,6 @@
 ﻿using Core.Interfaces;
 using Core.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +13,7 @@ namespace Infrastructure.Repositories
     {
         private IList<User> _users = new List<User> { };
 
-        public IList<User> Users 
+        public IList<User> Users
         {
             get
             {
@@ -37,14 +38,13 @@ namespace Infrastructure.Repositories
         {
             using (var stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + USERS_FILE_NAME, FileMode.OpenOrCreate))
             {
-                try
-                {
-                    return JsonSerializer.DeserializeAsync<IList<User>>(stream).Result;
-                }
-                catch (Exception)
-                {
-                    return new List<User>() { };
-                }
+                byte[] jsonArray = new byte[stream.Length];
+                stream.Read(jsonArray, 0, jsonArray.Length);
+                string json = System.Text.Encoding.Default.GetString(jsonArray);
+
+                return JsonConvert.DeserializeObject<IList<User>>(json) == null
+                    ? new List<User> { }
+                    : JsonConvert.DeserializeObject<IList<User>>(json);
             }
         }
 
@@ -74,9 +74,11 @@ namespace Infrastructure.Repositories
                 AllowTrailingCommas = true
             };
 
-            using (var stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + USERS_FILE_NAME, FileMode.OpenOrCreate))
+            using (var stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + USERS_FILE_NAME, FileMode.Truncate))
             {
-                    JsonSerializer.SerializeAsync<IList<User>>(stream, _users, options);
+                var json = JsonConvert.SerializeObject(_users);
+                var jsonArray = System.Text.Encoding.Default.GetBytes(json);
+                stream.Write(jsonArray, 0, jsonArray.Length);
             }
         }
     }

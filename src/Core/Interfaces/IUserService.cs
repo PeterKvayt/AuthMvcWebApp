@@ -9,6 +9,6 @@ namespace Core.Interfaces
         IEnumerable<User> Users { get; }
 
         void Add(User user);
-        void SetRole(string userId, string roleName);
+        void ModifyRole(string userId, string roleName);
     }
 }

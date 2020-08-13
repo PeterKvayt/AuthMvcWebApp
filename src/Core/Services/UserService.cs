@@ -22,7 +22,7 @@ namespace Core.Services
             _repository.Save();
         }
 
-        public void SetRole(string userId, string roleName)
+        public void ModifyRole(string userId, string roleName)
         {
             var user = _repository.Users.FirstOrDefault(u => u.Id.ToString() == userId);
 

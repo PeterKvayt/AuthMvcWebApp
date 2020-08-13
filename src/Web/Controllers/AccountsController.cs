@@ -147,11 +147,11 @@ namespace Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "admin")]
-        public IActionResult ModifyRole()
+        public IActionResult ModifyRole(ModifyUserRoleViewModel model)
         {
             if (User.Identity.IsAuthenticated)
             {
-                _userService.SetRole(ViewBag.UserId, ViewBag.RoleName);
+                _userService.ModifyRole(model.UserId, model.RoleName);
 
                 return RedirectToAction("AdminDashboard", "Accounts");
             }

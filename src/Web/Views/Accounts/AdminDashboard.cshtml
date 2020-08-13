@@ -1,14 +1,13 @@
 ﻿@model Core.ViewModels.UserViewModel
 
 @{
+    Layout = "_Layout";
+    ViewBag.PageTitle = "Admin dashboard";
+
+
     const string DEFAULT_USER_ROLE = "user";
     const string ADMIN_USER_ROLE = "admin";
 
-    void SetRequestData(UserViewModel user, string roleName)
-    {
-        ViewBag.UserId = user.Id;
-        ViewBag.RoleName = roleName;
-    }
 }
 
 <div class="row">
@@ -35,7 +34,7 @@
             {
                 <div class="card-body jumbotron">
                     <div class="card-title">
-                        <strong>Id</strong> : @user.Id
+                        <strong>Id</strong> : <span class="user-id">@user.Id</span>
                     </div>
                     <div class="card-subtitle">
                         <strong>Email</strong>: @user.Email
@@ -46,25 +45,29 @@
                     <div class="card-subtitle">
                         <strong>Role</strong>: @user.RoleName
                     </div>
-                    <form asp-action="ModifyRole" asp-controller="Accounts" method="post">
+                    <p>
                         @if (user.RoleName == DEFAULT_USER_ROLE)
                         {
-                            SetRequestData(user, ADMIN_USER_ROLE);
-                            <input class="btn btn-outline-info" type="submit" value="Boost to admin" />
+                            <button class="btn btn-outline-info boost">Boost to admin</button>
                         }
-                        @if(user.RoleName == ADMIN_USER_ROLE)
+                        @if (user.RoleName == ADMIN_USER_ROLE)
                         {
-                            SetRequestData(user, DEFAULT_USER_ROLE);
-                            <input class="btn btn-outline-warning" type="submit" value="Downgrade to user" />
+                            <button class="btn btn-outline-info downgrade">Downgrade to user</button>
                         }
-                    </form>
-
+                    </p>
                 </div>
             }
         }
     </div>
 
 </div>
+
+@section Scripts
+{
+    <script src="~/js/ModifyUserRoleViewModel.js"></script>
+    <script src="~/js/adminDashboard.js"></script>
+}
+
 
 
 
